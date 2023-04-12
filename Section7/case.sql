@@ -54,6 +54,60 @@ select *  ,
 		when student_id % 3 = 2 then test_score_3
 	end as score
 from tests_score;
+
+
+-- order by に case文を書く
+
+select * from prefectures;
+
+select * , 
+case 
+		when name in ('徳島県', '香川県', '愛媛県', '高知県') then '四国'
+		when name in ('三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県') then '近畿'
+		else 'その他'
+	end as 地域名
+from prefectures
+order by 
+	case 
+		when name in ('徳島県', '香川県', '愛媛県', '高知県') then '四国'
+		when name in ('三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県') then '近畿'
+		else 'その他'
+	end ;
+
+
+select * , 
+case 
+		when name in ('徳島県', '香川県', '愛媛県', '高知県') then '四国'
+		when name in ('三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県') then '近畿'
+		else 'その他'
+	end as 地域名
+from prefectures
+order by 
+	case 
+		when name in ('徳島県', '香川県', '愛媛県', '高知県') then '四国'
+		when name in ('三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県') then '近畿'
+		else 'その他'
+	end
+desc;
+
+
+select * , 
+case 
+		when name in ('徳島県', '香川県', '愛媛県', '高知県') then '四国'
+		when name in ('三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県') then '近畿'
+		else 'その他'
+	end as 地域名
+from prefectures
+order by 
+	case 
+		when name in ('徳島県', '香川県', '愛媛県', '高知県') then 0
+		when name in ('三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県') then 1
+		else 2
+	end;
+
+
+
+
 	
 
 	
