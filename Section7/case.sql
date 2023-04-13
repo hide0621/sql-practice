@@ -105,7 +105,25 @@ order by
 		else 2
 	end;
 
+-- NULLを使う場合
 
+select * from customers where name is null;
+
+SELECT *,
+       CASE
+           WHEN name IS NULL THEN '不明'
+           ELSE ''
+       END AS "NULL CHECK"
+FROM customers
+WHERE name IS NULL;
+
+SELECT *,
+       CASE
+           WHEN name IS NULL THEN '不明'
+           when name is not null then 'NULL以外'
+           ELSE ''
+       END AS "NULL CHECK"
+FROM customers;
 
 
 	
