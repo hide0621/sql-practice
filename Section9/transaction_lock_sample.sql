@@ -36,3 +36,16 @@ select * from customers where id = 1 for update; -- 別のユーザーが参照�
 
 rollback;
 
+
+-- 明示的にロックをかける場合
+
+begin;
+
+ -- lock table customers in EXCLUSIVE mode;
+lock table customers in share mode;
+
+select * from customers where id = 1;
+
+update customers set age = 44 where id = 1;
+
+commit;
