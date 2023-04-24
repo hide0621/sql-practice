@@ -107,6 +107,19 @@ from
 where cs.id < 10;
 
 
+-- caseの中に副問い合わせ
+
+select 
+	emp.*,
+	case 
+		when emp.department_id = (select id from departments where name = '経営企画部')
+		then '経営層'
+		else 'その他'
+	end as 役割
+from 
+	employees as emp;
+
+
 
 
 	
