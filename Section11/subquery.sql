@@ -56,3 +56,59 @@ where age < (
 );
 
 
+-- fromの中に副問い合わせ
+
+select department_id , avg(age) as avg_age from employees group by department_id;
+
+select max(avg_age) as 部署ごとの平均年齢の最大値
+from (
+	select department_id , avg(age) as avg_age from employees group by department_id
+) as tmp_age;
+
+
+select floor(age/10) * 10 , count(*) as age_count from employees
+group by floor(age/10);
+
+select 
+	max(age_count) , min(age_count) 
+from (
+	select floor(age/10) * 10 , count(*) as age_count from employees
+	group by floor(age/10)
+) as age_summary;
+
+
+-- selectの中に副問い合わせ
+
+select * from customers;
+
+select * from orders;
+
+select 
+	cs.id,
+	cs.first_name,
+	cs.last_name
+from 
+	customers as cs
+where cs.id < 10;
+
+
+select 
+	cs.id,
+	cs.first_name,
+	cs.last_name,
+	(
+	select max(order_date) from orders as order_max where cs.id = order_max.customer_id
+	) as 最近の注文日 , 
+	(
+	select min(order_date) from orders as order_max where cs.id = order_max.customer_id
+	) as 古い注文日
+from 
+	customers as cs
+where cs.id < 10;
+
+
+
+
+	
+
+
