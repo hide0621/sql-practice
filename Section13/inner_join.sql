@@ -48,3 +48,43 @@ on enr.class_id = cs.id;
 select * from enrollments as enr
 full join classes as cs 
 on enr.class_id = cs.id;
+
+
+-- 複雑なテーブル結合を練習する
+select 
+ct.id, ct.last_name, od.item_id, od.order_amount, od.order_price, od.order_price, it.name, st.name
+from customers as ct
+inner join orders as od 
+on ct.id = od.customer_id
+inner join items as it
+on od.item_id = it.id
+inner join stores as st
+on it.store_id = st.id
+order by ct.id;
+
+-- where句を交えて複雑なテーブル結合を書く
+select 
+ct.id, ct.last_name, od.item_id, od.order_amount, od.order_price, od.order_price, it.name, st.name
+from customers as ct
+inner join orders as od 
+on ct.id = od.customer_id
+inner join items as it
+on od.item_id = it.id
+inner join stores as st
+on it.store_id = st.id
+where ct.id = 10 and od.order_date > '2020-08-01'
+order by ct.id;
+
+
+-- サブクエリを交えて複雑なテーブル結合を書く
+-- ただ視認性が下がるので、この書き方はしないこと
+select 
+ct.id, ct.last_name, od.item_id, od.order_amount, od.order_price, od.order_price, it.name, st.name
+from (select * from customers where id = 10 ) as ct
+inner join (select * from orders where order_date > '2020-08-01' ) as od 
+on ct.id = od.customer_id
+inner join items as it
+on od.item_id = it.id
+inner join stores as st
+on it.store_id = st.id
+order by ct.id;
