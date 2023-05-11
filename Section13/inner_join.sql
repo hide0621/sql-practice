@@ -88,3 +88,33 @@ on od.item_id = it.id
 inner join stores as st
 on it.store_id = st.id
 order by ct.id;
+
+
+-- self join(自己結合)の学習
+select * from employees as emp1
+inner join employees as emp2
+on emp1.manager_id = emp2.id;
+
+select 
+	concat(emp1.last_name, emp1.first_name) as 部下の名前,
+	emp1.age as 部下の年齢,
+	concat(emp2.last_name, emp2.first_name) as 上司の名前,
+	emp2.age as 上司の年齢
+from employees as emp1
+inner join employees as emp2
+on emp1.manager_id = emp2.id;
+
+select 
+	concat(emp1.last_name, emp1.first_name) as 部下の名前,
+	emp1.age as 部下の年齢,
+	concat(emp2.last_name, emp2.first_name) as 上司の名前,
+	emp2.age as 上司の年齢
+from employees as emp1
+left join employees as emp2
+on emp1.manager_id = emp2.id;
+
+
+-- cross join（交差結合）の学習
+select * from employees as emp1
+cross join employees as emp2
+where emp1.id < emp2.id;
