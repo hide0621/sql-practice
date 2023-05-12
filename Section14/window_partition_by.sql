@@ -15,3 +15,19 @@ select
 *,
 sum(order_amount * order_price) over(partition by order_date)
 from orders;
+
+-- window関数内でorder byを使う場合
+select 
+*,
+count(*) over(order by age) as tmp_count
+from employees;
+
+select 
+*,
+sum(order_price) over(order by order_date)
+from orders;
+
+select 
+*,
+sum(order_price) over(order by order_date desc)
+from orders;
