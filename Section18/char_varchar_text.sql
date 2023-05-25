@@ -43,4 +43,21 @@ select * from managers;
 select * from managers where is_superuser = true;
 
 
+-- indexの学習
 
+select * from students;
+explain select * from students where name = 'Taro';
+
+-- studentsテーブルのnameカラムにインデックスを貼っている
+create index idx_students_name on students(name);
+
+-- 関数インデックスを貼っている(関数の処理結果にインデックスを貼っている)
+create index idx_students_lower_name on students(lower(name));
+
+-- uniqueインデックスを貼っている
+create unique index idx_users_unique_first_name on users (first_name);
+
+select * from users;
+
+insert into users (id, first_name) values (2, 'ABC');
+insert into users (id, first_name) values (3, 'ABC'); -- uniuqe制約がインデックスと一緒に貼られているのでエラーになる
