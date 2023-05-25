@@ -42,6 +42,22 @@ insert into customers (id, name) values (3, null);
 -- check制約の追加
 alter table customers add constraint check_age check(age >= 20);
 
+-- serial（自動的に増分させる）の学習
+CREATE TABLE animals (
+    id serial PRIMARY KEY,
+    name varchar(50) NOT NULL
+);
+-- 自動的にidが挿入・増分される
+INSERT INTO animals (name) VALUES ('Dog');
+insert into animals (name) values ('Cat');
+insert into animals values (4, 'Panda');
+-- 上記でid４が挿入されたが、自動挿入の続きとして「3」が挿入される 
+-- auto_increment（MySQL）との違い
+insert into animals (name) values ('Fish');
+
+select * from animals;
+
+
 
 
 
